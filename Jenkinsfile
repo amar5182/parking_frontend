@@ -1,13 +1,11 @@
 pipeline {
 	environment {
-    registry = "amarreddy94/test"
-    registryCredential = 'dockerhub'
-    dockerImage = ' '
+    registry = "amarreddy94/docker-test"
+    registryCredential = "dockerhub"
+    dockerImage = " "
   }
-
 	agent any
 		stages {
-			/**Insurance-Frontend Pipeline Job Build and Test stages **/
 			stage('SCM Checkout') {
 				steps {
 					git url: 'https://github.com/amar5182/parking_frontend.git'
@@ -29,7 +27,7 @@ pipeline {
 			stage('Deploy Image') {
       steps{
         script {
-          docker.withRegistry( '', registryCredential ) {
+          docker.withRegistry( " ",registryCredential ) {
             dockerImage.push()
           }
         }
@@ -40,7 +38,5 @@ pipeline {
         sh "docker rmi $registry:$BUILD_NUMBER"
       }
     }
-
-
-				}
-		}
+}
+}
