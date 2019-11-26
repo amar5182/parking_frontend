@@ -1,4 +1,8 @@
 pipeline {
+	environment {
+    registry = "amarreddy94/test"
+    registryCredential = 'HAmar@1994'
+  }
 	agent any
 		stages {
 			/**Insurance-Frontend Pipeline Job Build and Test stages **/
@@ -13,14 +17,15 @@ pipeline {
 					sh"npm run build"
 							}
 					}
-           stage('docker_login') {
-				steps {
-					// This step should not normally be used in your script. Consult the inline help for details.
-withDockerRegistry(credentialsId: 'Docker', url: 'https://hub.docker.com/repository/docker/') {
-    // some block
-							}
-							}
-					}
+			stages {
+ 				 stage('Building image') {
+ 					   steps{
+  						    script {
+  							      docker.build registry + ":$BUILD_NUMBER"
+  									    }
+   								 }
+ 							 }
+						}
 			stage('Push Image') {
 				steps {
 					sh"docker build -t amarreddy94/amartomcat"
