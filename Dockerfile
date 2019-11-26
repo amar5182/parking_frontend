@@ -1,9 +1,6 @@
-FROM tomcat
+FROM amarreddy94/amartomcat
 MAINTAINER amarnath
-WORKDIR /opt
-RUN apt-get update -y
-RUN apt-get upgrade -y
-COPY tomcat-users.xml /usr/local/tomcat/conf/
-COPY context.xml /usr/local/tomcat/webapps/manager/META-INF/
+
+COPY $WORKSPACE/build /usr/local/tomcat/webapps
 EXPOSE 8080
 
