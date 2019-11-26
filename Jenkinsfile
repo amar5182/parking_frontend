@@ -1,28 +1,23 @@
 pipeline {
-    agent any 
-    tools {nodejs "NODEJS"} // NODEJS is the variable which is mentioned in global tool configurations
-    stages {
-        stage('checkout') { 
-            steps {
-                git url: 'https://github.com/devopsdemo-in/parking_frontend'
-            }
-        }
-        stage('Test') { 
-            steps {
-                sh '''
-                npm install
-                npm run build
-            '''
-            }
-        }
-        stage('Deploy') { 
-            steps {
-                sh '''
-                cd /var/lib/jenkins/workspace/pipeline
-                chmod -R 777 build/
-                cp -rf build/ /opt/apache-tomcat-9.0.26/webapps/
-            '''
-            }
-        }
-    }
-}
+	agent any
+		stages {
+			/**Insurance-Frontend Pipeline Job Build and Test stages **/
+			stage('SCM Checkout') {
+				steps {
+					git url: 'https://github.com/amar5182/insurance_frontend.git'
+						}
+								}
+			stage('Build') {
+				steps {
+					sh"npm install"
+					sh"npm run build"
+							}
+					}
+           stage('Deploy') {
+				steps {
+					sh"cp -r $WORKSPACE/build /var/workspace"
+					sh"curl -u admin:admin http://3.0.175.22:8888/manager/reload?path=/build"
+							}
+					}
+				}
+		}
