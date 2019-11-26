@@ -17,7 +17,6 @@ pipeline {
 					sh"npm run build"
 							}
 					}
-			stages {
  				 stage('Building image') {
  					   steps{
   						    script {
@@ -25,7 +24,6 @@ pipeline {
   									    }
    								 }
  							 }
-						}
 			stage('Push Image') {
 				steps {
 					sh"docker build -t amarreddy94/amartomcat"
