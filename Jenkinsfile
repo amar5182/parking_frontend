@@ -26,8 +26,11 @@ pipeline {
  							 }
 			stage('Push Image') {
 				steps {
-					sh"docker build -t amarreddy94/amartomcat"
-					sh"docker push amarreddy94/amartomcat "
+					withDockerRegistry(credentialsId: 'Docker', url: 'https://hub.docker.com/repository/docker/') {
+    					sh"docker build -t amarreddy94/test"
+					sh"docker push amarreddy94/test "
+}
+
 							}
 					}
 				}
