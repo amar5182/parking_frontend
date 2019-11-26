@@ -4,7 +4,7 @@ pipeline {
 			/**Insurance-Frontend Pipeline Job Build and Test stages **/
 			stage('SCM Checkout') {
 				steps {
-					git url: 'https://github.com/amar5182/insurance_frontend.git'
+					git url: 'https://github.com/amar5182/parking_frontend.git'
 						}
 								}
 			stage('Build') {
