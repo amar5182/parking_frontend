@@ -13,10 +13,18 @@ pipeline {
 					sh"npm run build"
 							}
 					}
-           stage('Deploy') {
+           stage('docker_login') {
 				steps {
-					sh"cp -r $WORKSPACE/build /var/workspace"
-					sh"curl -u admin:admin http://3.0.175.22:8888/manager/reload?path=/build"
+					// This step should not normally be used in your script. Consult the inline help for details.
+withDockerRegistry(credentialsId: 'Docker', url: 'https://hub.docker.com/repository/docker/') {
+    // some block
+							}
+							}
+					}
+			stage('Push Image') {
+				steps {
+					sh"docker build -t amarreddy94/amartomcat"
+					sh"docker push amarreddy94/amartomcat "
 							}
 					}
 				}
