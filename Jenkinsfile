@@ -1,9 +1,10 @@
 pipeline {
 	environment {
     registry = "amarreddy94/test"
-    registryCredential = 'Docker'
+    registryCredential = 'dockerhub'
     dockerImage = ''
   }
+
 	agent any
 		stages {
 			/**Insurance-Frontend Pipeline Job Build and Test stages **/
